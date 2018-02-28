@@ -1,9 +1,11 @@
 package ch.csbe.mail.snaked;
 
 import android.graphics.Color;
+import android.graphics.Point;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import ch.csbe.mail.snaked.views.SnakeView;
@@ -17,7 +19,27 @@ public class Main extends AppCompatActivity {
 
         //setContentView(R.layout.activity_main);
 
-        startGame();
+        setContentView(R.layout.activity_main);
+
+        Point p = new Point();
+
+        getWindowManager().getDefaultDisplay().getSize(p);
+
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(p.x-16, p.y-86);
+        layoutParams.setMargins(8, 150, 8, 8);
+
+
+        LinearLayout sc = findViewById(R.id.linearlayout);
+
+        snakeView = new SnakeView(sc.getContext());
+
+        snakeView.setLayoutParams(layoutParams);
+
+
+        sc.addView(snakeView);
+
+
+        //startGame();
 
 
     }

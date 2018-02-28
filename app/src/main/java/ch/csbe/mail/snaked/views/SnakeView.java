@@ -243,7 +243,7 @@ public class SnakeView extends View {
         snakeBody.add(body);
     }
 
-    private int fruitDelay = 2;
+    private int fruitDelay = 19;
     private int fruitCounter = 0;
 
 
