@@ -135,22 +135,22 @@ public class SnakeView extends View {
 
 
         if (Math.abs(xDiff) > Math.abs(yDiff)){
-            if (xDiff < 100 && movementDirection!=3)
+            if (xDiff < -150 && movementDirection!=3)
                 dir = 1;
-            if (xDiff > 100 && movementDirection!=1)
+            if (xDiff > 150 && movementDirection!=1)
                 dir = 3;
         } else {
-            if (yDiff > 100 && movementDirection!=2)
+            if (yDiff > 150 && movementDirection!=2)
                 dir = 0;
-            if (yDiff < 100 && movementDirection!=0)
+            if (yDiff < -150 && movementDirection!=0)
                 dir = 2;
         }
 
-        /*
+
         Log.e("xDiff", Integer.toString(xDiff));
         Log.e("yDiff", Integer.toString(yDiff));
         Log.e("DIR", Integer.toString(dir));
-        */
+
 
 
         return dir;

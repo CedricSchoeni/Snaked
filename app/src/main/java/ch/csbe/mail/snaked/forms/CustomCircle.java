@@ -79,7 +79,7 @@ public class CustomCircle implements CustomForm {
     public void drawObject(Canvas c) {
         Paint p = new Paint();
         p.setColor(color);
-        c.drawCircle(xPos + radius/2, yPos + radius*2/3, radius, p);
+        c.drawCircle(xPos + radius/2, yPos + radius/2, radius, p);
     }
 
     public CustomCircle(int xPos, int yPos, int xField, int yField, int color, int radius) {
