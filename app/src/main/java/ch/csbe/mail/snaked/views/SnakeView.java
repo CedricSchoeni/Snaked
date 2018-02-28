@@ -1,6 +1,7 @@
 package ch.csbe.mail.snaked.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
@@ -11,14 +12,19 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.csbe.mail.snaked.Main;
+import ch.csbe.mail.snaked.MainMenu;
 import ch.csbe.mail.snaked.R;
 import ch.csbe.mail.snaked.forms.CustomCircle;
 import ch.csbe.mail.snaked.forms.CustomForm;
 import ch.csbe.mail.snaked.forms.CustomRectangle;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * Created by Cedric on 26.02.2018.
@@ -35,6 +41,11 @@ public class SnakeView extends View {
     private int fieldWidth;
     private int fieldHeight;
 
+    private TextView textView;
+
+    private int score = 0;
+    private Main main;
+
     private int movementDirection = 1;
 
     private List<CustomForm> renderList;
@@ -43,7 +54,7 @@ public class SnakeView extends View {
 
     Handler handler = new Handler();
 
-    public SnakeView(Context context) {
+    public SnakeView(Context context, TextView textView, Main main) {
         super(context);
 
         devWidth = getWidth();
@@ -62,6 +73,8 @@ public class SnakeView extends View {
         snakeBody = new ArrayList<CustomForm>();
         fruits = new ArrayList<CustomForm>();
 
+        this.textView = textView;
+        this.main = main;
     }
 
     @Override
@@ -138,14 +151,14 @@ public class SnakeView extends View {
 
 
         if (Math.abs(xDiff) > Math.abs(yDiff)){
-            if (xDiff < -100 && movementDirection!=3)
+            if (xDiff < -50 && movementDirection!=3)
                 dir = 1;
-            if (xDiff > 100 && movementDirection!=1)
+            if (xDiff > 50 && movementDirection!=1)
                 dir = 3;
         } else {
-            if (yDiff > 100 && movementDirection!=2)
+            if (yDiff > 50 && movementDirection!=2)
                 dir = 0;
-            if (yDiff < -100 && movementDirection!=0)
+            if (yDiff < -50 && movementDirection!=0)
                 dir = 2;
         }
 
@@ -234,16 +247,20 @@ public class SnakeView extends View {
 
     private void gameOver(){
         handler.removeCallbacksAndMessages(null);
+        main.mainMenu();
     }
 
     private void growSnake(){
+
+
+        textView.setText("Score: " + Integer.toString(++score));
         CustomForm cf = snakeBody.get(snakeBody.size() - 1);
         CustomForm body = new CustomRectangle((fieldWidth * cf.getxField()), (fieldHeight * cf.getyField()),cf.getxField(), cf.getyField(), Color.GREEN, fieldWidth, fieldHeight);
         renderList.add(body);
         snakeBody.add(body);
     }
 
-    private int fruitDelay = 19;
+    private int fruitDelay = 39;
     private int fruitCounter = 0;
 
 
@@ -251,7 +268,7 @@ public class SnakeView extends View {
         @Override
         public void run() {
             // scheduled another events to be in 10 seconds later
-            handler.postDelayed(periodicUpdate, 250);
+            handler.postDelayed(periodicUpdate, 100);
             // below is whatever you want to do
             invalidate();
             if (fruitCounter++ == fruitDelay){

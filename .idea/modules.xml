@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Snaked.iml" filepath="$PROJECT_DIR$/Snaked.iml" />
+      <module fileurl="file://C:\Users\cedric.schoeni\StudioProjects\Snakedxd\Snaked.iml" filepath="C:\Users\cedric.schoeni\StudioProjects\Snakedxd\Snaked.iml" />
       <module fileurl="file://C:\Users\adriano.campiotti\AndroidStudioProjects\Snaked\Snaked.iml" filepath="C:\Users\adriano.campiotti\AndroidStudioProjects\Snaked\Snaked.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Snakedxd.iml" filepath="$PROJECT_DIR$/.idea/Snakedxd.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\adriano.campiotti\AndroidStudioProjects\Snaked\app\app.iml" filepath="C:\Users\adriano.campiotti\AndroidStudioProjects\Snaked\app\app.iml" />
+      <module fileurl="file://C:\Users\cedric.schoeni\StudioProjects\Snakedxd\app\app.iml" filepath="C:\Users\cedric.schoeni\StudioProjects\Snakedxd\app\app.iml" />
     </modules>
   </component>
 </project>
