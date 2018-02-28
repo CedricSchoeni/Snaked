@@ -10,10 +10,12 @@ import android.util.Log;
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.csbe.mail.snaked.R;
 import ch.csbe.mail.snaked.forms.CustomCircle;
 import ch.csbe.mail.snaked.forms.CustomForm;
 import ch.csbe.mail.snaked.forms.CustomRectangle;
@@ -65,6 +67,7 @@ public class SnakeView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
 
         updateSnake();
         // Draw all parts in the renderList
@@ -135,22 +138,22 @@ public class SnakeView extends View {
 
 
         if (Math.abs(xDiff) > Math.abs(yDiff)){
-            if (xDiff < -150 && movementDirection!=3)
+            if (xDiff < -100 && movementDirection!=3)
                 dir = 1;
-            if (xDiff > 150 && movementDirection!=1)
+            if (xDiff > 100 && movementDirection!=1)
                 dir = 3;
         } else {
-            if (yDiff > 150 && movementDirection!=2)
+            if (yDiff > 100 && movementDirection!=2)
                 dir = 0;
-            if (yDiff < -150 && movementDirection!=0)
+            if (yDiff < -100 && movementDirection!=0)
                 dir = 2;
         }
 
-
+        /*
         Log.e("xDiff", Integer.toString(xDiff));
         Log.e("yDiff", Integer.toString(yDiff));
         Log.e("DIR", Integer.toString(dir));
-
+        */
 
 
         return dir;
@@ -240,7 +243,7 @@ public class SnakeView extends View {
         snakeBody.add(body);
     }
 
-    private int fruitDelay = 19;
+    private int fruitDelay = 2;
     private int fruitCounter = 0;
 
 
@@ -264,19 +267,19 @@ public class SnakeView extends View {
             x= (int) (Math.random() * (xFields - 0)) + 0;
             y= (int) (Math.random() * (yFields - 0)) + 0;
 
-            boolean isRoiTheBoi = false;
+            boolean onSnake = false;
             for (CustomForm piece : snakeBody){
                 if(x==piece.getxField() && y==piece.getyField())
-                    isRoiTheBoi = true;
+                    onSnake = true;
             }
-            if (!isRoiTheBoi) break;
 
-            isRoiTheBoi = false;
+
+            boolean onFruit = false;
             for (CustomForm piece : fruits){
                 if(x==piece.getxField() && y==piece.getyField())
-                    isRoiTheBoi = true;
+                    onFruit = true;
             }
-            if (!isRoiTheBoi) break;
+            if (!onSnake && !onFruit) break;
 
         }
 
