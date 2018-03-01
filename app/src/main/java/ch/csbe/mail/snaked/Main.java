@@ -6,11 +6,13 @@ import android.graphics.Point;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import ch.csbe.mail.snaked.values.Score;
 import ch.csbe.mail.snaked.views.SnakeView;
 
 import static android.support.v4.content.ContextCompat.startActivity;
@@ -57,15 +59,21 @@ public class Main extends AppCompatActivity {
         android.support.v7.widget.GridLayout sc = findViewById(R.id.gridlayout);
 
         SnakeView g = new SnakeView(sc.getContext(), textView, this);
-
+        //Log.e("Sc.width",sc.getLayoutParams().width+"px");
+        //Log.e("Sc.height",sc.getLayoutParams().height+"px");
         sc.addView(g);
 
-        g.startGame();
+        //g.startGame();
 
 
     }
 
-    public void mainMenu(){
-        startActivity(new Intent(Main.this, MainMenu.class));
+
+
+
+    public void mainMenu(int lastScore){
+        Intent mainMenu = new Intent(Main.this,MainMenu.class);
+        Score.score=lastScore;
+        startActivity(mainMenu);
     }
 }

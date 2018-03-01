@@ -11,6 +11,7 @@ import android.util.Log;
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ public class SnakeView extends View {
     private int devHeight;
 
     private int xFields = 20;
-    private int yFields = 20;
+    private int yFields;
 
     private int fieldWidth;
     private int fieldHeight;
@@ -45,6 +46,7 @@ public class SnakeView extends View {
 
     private int score = 0;
     private Main main;
+    private Context context;
 
     private int movementDirection = 1;
 
@@ -57,17 +59,6 @@ public class SnakeView extends View {
     public SnakeView(Context context, TextView textView, Main main) {
         super(context);
 
-        devWidth = getWidth();
-        devHeight = getHeight();
-
-        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
-        devWidth = Math.min(metrics.widthPixels, metrics.heightPixels);
-        devHeight = devWidth;//metrics.heightPixels;
-
-        fieldWidth = devWidth / xFields;
-        fieldHeight = devHeight / yFields;
-
-        this.setOnTouchListener(handleTouch);
 
         renderList = new ArrayList<CustomForm>();
         snakeBody = new ArrayList<CustomForm>();
@@ -75,6 +66,7 @@ public class SnakeView extends View {
 
         this.textView = textView;
         this.main = main;
+        this.context=context;
     }
 
     @Override
@@ -88,6 +80,32 @@ public class SnakeView extends View {
             form.drawObject(canvas);
         }
 
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        //prev in snakeview()
+
+
+
+        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+
+
+        devWidth = getWidth();
+        devHeight =  getHeight();
+
+        Log.e("gridH", Integer.toString(devHeight));
+        Log.e("gridW", Integer.toString(devWidth));
+        fieldWidth = devWidth / xFields;
+        fieldHeight = fieldWidth;
+        yFields = devHeight / fieldHeight;
+
+        fieldWidth = devWidth / xFields;
+        fieldHeight = devHeight / yFields;
+
+        this.setOnTouchListener(handleTouch);
+        this.startGame();
     }
 
     public void startGame(){
@@ -162,11 +180,11 @@ public class SnakeView extends View {
                 dir = 2;
         }
 
-        /*
+/*
         Log.e("xDiff", Integer.toString(xDiff));
         Log.e("yDiff", Integer.toString(yDiff));
         Log.e("DIR", Integer.toString(dir));
-        */
+*/
 
 
         return dir;
@@ -247,7 +265,7 @@ public class SnakeView extends View {
 
     private void gameOver(){
         handler.removeCallbacksAndMessages(null);
-        main.mainMenu();
+        main.mainMenu(score);
     }
 
     private void growSnake(){

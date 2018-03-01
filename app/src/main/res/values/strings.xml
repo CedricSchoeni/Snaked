@@ -2,4 +2,6 @@
     <string name="app_name">Snaked</string>
     <string name="button_play">Play</string>
     <string name="imgLogo_desc">This is the Logo of the game.</string>
+    <string name="score_default">Score: 0</string>
+    <string name="last_score">Last Score: none</string>
 </resources>
