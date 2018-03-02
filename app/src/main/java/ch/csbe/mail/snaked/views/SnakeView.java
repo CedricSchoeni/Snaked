@@ -286,7 +286,7 @@ public class SnakeView extends View {
         @Override
         public void run() {
             // scheduled another events to be in 10 seconds later
-            handler.postDelayed(periodicUpdate, 100);
+            handler.postDelayed(periodicUpdate, 150);
             // below is whatever you want to do
             invalidate();
             if (fruitCounter++ == fruitDelay){
@@ -298,10 +298,14 @@ public class SnakeView extends View {
 
     private void spawnFruit(){
         int x=0,y=0;
+        int skip = 150;
+        int counter = 0;
         while(true){
             x= (int) (Math.random() * (xFields - 0)) + 0;
             y= (int) (Math.random() * (yFields - 0)) + 0;
-
+            if (++counter > skip){
+                return;
+            }
             boolean onSnake = false;
             for (CustomForm piece : snakeBody){
                 if(x==piece.getxField() && y==piece.getyField())
@@ -323,16 +327,6 @@ public class SnakeView extends View {
         fruits.add(fruit);
     }
 
-    private Runnable periodicUpdate5 = new Runnable () {
-        @Override
-        public void run() {
-            // scheduled another events to be in 10 seconds later
-            handler.postDelayed(periodicUpdate, 5000);
-            // below is whatever you want to do
-            spawnFruit();
-
-        }
-    };
 
 
 }
