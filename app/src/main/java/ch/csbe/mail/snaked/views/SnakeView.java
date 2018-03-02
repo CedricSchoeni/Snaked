@@ -286,8 +286,15 @@ public class SnakeView extends View {
     private Runnable periodicUpdate = new Runnable () {
         @Override
         public void run() {
-            // scheduled another events to be in 10 seconds later
-            handler.postDelayed(periodicUpdate, 150);
+            // scheduled another events to be in x milli-seconds later
+            int timer=150;
+            boolean fasterOverTime=false;
+            int tmp=5*score;
+            if(timer-score>=50 && fasterOverTime)
+                handler.postDelayed(periodicUpdate, (timer-score*5));
+            else
+                handler.postDelayed(periodicUpdate, timer);
+            //handler.postDelayed(periodicUpdate, timer);
             // below is whatever you want to do
             invalidate();
             if (fruitCounter++ == fruitDelay){
