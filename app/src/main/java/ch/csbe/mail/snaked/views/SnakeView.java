@@ -248,6 +248,7 @@ public class SnakeView extends View {
             for (CustomForm piece2 : fruits){
                 if(x==piece2.getxField() && y==piece2.getyField()){
                     isRoiSnaked = true;
+                    RoiFruit=piece2;
                     renderList.remove(piece2);
                 }
             }
@@ -269,7 +270,7 @@ public class SnakeView extends View {
     }
 
     private void growSnake(){
-
+        //Log.e("Grew:","");
 
         textView.setText("Score: " + Integer.toString(++score));
         CustomForm cf = snakeBody.get(snakeBody.size() - 1);
